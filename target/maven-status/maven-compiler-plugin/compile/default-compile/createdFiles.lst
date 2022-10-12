@@ -1,0 +1,8 @@
+Utilisateur.class
+ws\ProductsWs.class
+bean\Product.class
+Db\RestClient.class
+ws\RestApi.class
+Db\Connexion.class
+bean\ProductManger.class
+bean\User.class
