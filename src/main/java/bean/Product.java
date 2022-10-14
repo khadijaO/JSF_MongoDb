@@ -6,6 +6,7 @@
 package bean;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -23,8 +24,12 @@ import jdk.nashorn.internal.objects.annotations.Getter;
 
 public class Product  implements Serializable {
 List<Product>pp=new ArrayList<>();
+List<Product>productsForcat=new ArrayList<>();
+
 List<String>categories=new ArrayList<>();
 List<String>sous_categories=new ArrayList<>();
+Product selectedProduct;
+HashMap <String,String>sous_categories_images;
     public List<Product> getPp() {
         return pp;
     }
@@ -32,6 +37,8 @@ List<String>sous_categories=new ArrayList<>();
     public void setPp(List<Product> pp) {
         this.pp = pp;
     }
+    private String id;
+    private double oldprice;
 private String title;
 private  String webSite;
 private String category;
@@ -53,20 +60,53 @@ private String sous_category;
 this.pp=pm.getAll();
 this.categories=pm.getCategories();
 this.sous_categories=pm.getSousCategories();
+//this.sous_categories_images=pm.getSousCategoriesImages();
 
     }
+
+    public Product getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(Product selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+    
+    public String redirProd(String id){
+                ProductManger pm=new ProductManger();
+//
+        this.selectedProduct=new Product();
+        this.selectedProduct=pm.getOneProduct(id);
+        return "ProductDetails.xhtml";
+    }
+      public String redircat(String cat){
+                ProductManger pm=new ProductManger();
+
+        this.productsForcat=pm.getallProductsforCat(cat);
+        return "CategoryDetails.xhtml?faces-redirect=true";
+    }
+    
+    
 
     public Product(String title) {
         this.title = title;
     }
 
-    public Product(String sous_category,String source,String title, String webSite, String category, String description, String image, int rate, double price, double reduction) {
+    public Product(double oldprice,String id,String sous_category,String source,String title, String webSite, String category, String description, String image, int rate, double price, double reduction) {
         this.title = title;
+        this.id=id;
+        this.oldprice=oldprice;
         this.webSite = webSite;
         this.category = category;
         this.description = description;
-        this.source=source;
+//        this.source=source;
         this.sous_category=sous_category;
+        if(source==null){
+            this.source="#";
+        }
+        else
+            this.source=source;
+        
         if(image==null){
             this.image="https://stores.lifestylestores.com/VendorpageTheme/Enterprise/EThemeForLifestyleUpdated/images/product-not-found.jpg";
         }
@@ -174,6 +214,38 @@ this.sous_categories=pm.getSousCategories();
 
     public void setSous_categories(List<String> sous_categories) {
         this.sous_categories = sous_categories;
+    }
+
+    public HashMap <String,String>getSous_categories_images() {
+        return sous_categories_images;
+    }
+
+    public void setSous_categories_images(HashMap <String,String> sous_categories_images) {
+        this.sous_categories_images = sous_categories_images;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Product> getProductsForcat() {
+        return productsForcat;
+    }
+
+    public void setProductsForcat(List<Product> productsForcat) {
+        this.productsForcat = productsForcat;
+    }
+
+    public double getOldprice() {
+        return oldprice;
+    }
+
+    public void setOldprice(double oldprice) {
+        this.oldprice = oldprice;
     }
     
 

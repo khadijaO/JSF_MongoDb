@@ -101,28 +101,29 @@ private static final long serialVersionUID = 2729758432756108274L;
        
 
 
-        Bson filter = and(eq("pwd", this.password), eq("email",this.Email));
-           Document doc = this.collection.find(filter ).first();
-           if(doc==null){
-               System.out.println("--------------");        
-//               return "index.xhtml";
-                
-               return "ErrorPage.xhtml";
+//        Bson filter = and(eq("pwd", this.password), eq("email",this.Email));
+//           Document doc = this.collection.find(filter ).first();
+//           if(doc==null){
+//               System.out.println("--------------");        
+////               return "index.xhtml";
+//                
+//               return "ErrorPage.xhtml";
+//
+//           }
+//           else{
+//            try {
+//                RestApi r=new RestApi();
+//                this.setEmail(r.getData());
+//            } catch (UnirestException ex) {
+//                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//               
+//            System.out.println("11111111");        
+//
+//                   return "home.xhtml";
+//           }
 
-           }
-           else{
-            try {
-                RestApi r=new RestApi();
-                this.setEmail(r.getData());
-            } catch (UnirestException ex) {
-                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-            }
-               
-            System.out.println("11111111");        
-
-                   return "home.xhtml";
-           }
-
+      return "home";
 
 //   if(this.getEmail().equals("khadija") && this.getPassword().equals("123"))
 //    
